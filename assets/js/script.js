@@ -1,96 +1,55 @@
-// Assignment code here
-
-
-// Get references to the #generate element
+// Assignment Code
 var generateBtn = document.querySelector("#generate");
-var Number = "0123456789";
-var Uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-var Lowercase = "abcdefghijklmnopqrstuvwxyz";
-var character = "!@#$%^&*_-+=";
+// VARIABLES
+var lowerChar = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+var upperChar = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+var numberChar = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+var specChar = ["!", "@", "#", "$", "%", "^", "&", "*"];
+var passLength = "";
+var PassPool = [];
 
-
-
+// GET PASSWORD LENGTH
 function generatePassword() {
-  // Asks for user input
-  enter = parseInt(prompt("How many characters would you like your password? Choose between 8 and 128"));
-  // First if statement for user validation 
-  if (!enter) {
-      alert("This needs a value");
-  } else if (enter < 8 || enter > 128) {
-      // Validates user input
-      // Start user input prompts
-      enter = parseInt(prompt("You must choose between 8 and 128"));
+    passLength = (prompt("How long will your password be, it must be between 8 to 128 characters?"));
+  if (passLength < 8 != passLength > 128)
+  passLength = (prompt("Please enter between 8 - 128 characters"));
 
-  } else {
-      // Continues once user input is validated
-      confirmNumber = confirm("Will this contain numbers?");
-      confirmCharacter = confirm("Will this contain special characters?");
-      confirmUppercase = confirm("Will this contain Uppercase letters?");
-      confirmLowercase = confirm("Will this contain Lowercase letters?");
-  };
-  if (confirmCharacter && confirmNumber && confirmUppercase && confirmLowercase) {
+ pickLOWER = confirm("Do you want to use lowercase characters?");
+ pickUPPER = confirm("Do you want to use uppercase characters?");
+ pickNumb = confirm("Do you want to use numbers?");
+ pickSpec = confirm("Do you want to use special characters?");
 
-    choices = character.concat(number, alpha, alpha2);
+// TO CONFIRM CHOICES
+var userChoice = [];
+if (pickLOWER) {
+  userChoice = userChoice.concat(lowerChar)
 }
-// Else if for 3 positive options
- if (confirmCharacter && confirmNumber && confirmUppercase) {
-    choices = character.concat(number, alpha2);
+if (pickUPPER) {
+  userChoice = userChoice.concat(upperChar)
 }
-if (confirmCharacter && confirmNumber && confirmLowercase) {
-    choices = character.concat(number, alpha);
+if (pickNumb) {
+  userChoice = userChoice.concat(numberChar)
 }
-if (confirmCharacter && confirmLowercase && confirmUppercase) {
-    
+if (pickSpec) {
+  userChoice = userChoice.concat(specChar)
 }
-if (confirmNumber && confirmLowercase && confirmUppercase) {
-    
-}
-// Else if for 2 positive options 
-if (confirmCharacter && confirmNumber) {
-   
-
-} 
-if (confirmCharacter && confirmLowercase) {
-    
-
-}
-if (confirmCharacter && confirmUppercase) {
-    
-}
-if (confirmLowercase && confirmNumber) {
-    
-
-} 
-if (confirmLowercase && confirmUppercase) {
-    
-
-}
-if (confirmNumber && confirmUppercase) {
-    
-}
-// Else if for 1 positive option
-else if (confirmCharacter) {
-    choices = character;
-}
-else if (confirmNumber) {
-    choices = number;
-}
-else if (confirmLowercase) {
-    choices = alpha;
-}
-// Created space variable to fill uppercase conversion
-else if (confirmUppercase) {
-    choices = space.concat(alpha2);
-};
-
-}
-// Write password to the #password input
+ console.log(userChoice)
+// MATH FOR PASSWORD
+  var PassPool = ""
+  for (var i = 0; i < passLength; i++) {
+    PassPool = PassPool + userChoice[Math.floor(Math.random() * userChoice.length)];
+    password = PassPool;
+    }
+    return PassPool;
+  }   
+ 
+// Function to write password to text area
 function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
-
+  
 }
 
 // Add event listener to generate button
